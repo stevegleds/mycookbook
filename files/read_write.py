@@ -36,7 +36,8 @@ def update_output_file(input_filename, output_filename):
                     emails.append(i[4:])
         emails = list(set(emails))  # Removes duplicates
         emails.insert(0, 'email')  # Add title to first row for import
-        emailsfile = open(output_filename, 'w', newline='')  # newline='' is to stop blank lines being inserted in csv file.
+        emailsfile = open(output_filename, 'w', newline='')
+        # newline='' is to stop blank lines being inserted in csv file.
         wr = csv.writer(emailsfile, quoting=csv.QUOTE_ALL)
         for email in emails:
             wr.writerow([email])
