@@ -15,10 +15,11 @@ def process_sourcefile(input_filename, old_file):
         old_file = True
     print("filename is: ", input_file, "modified on :", datetime.date.fromtimestamp(os.path.getmtime(input_file)))
     if old_file:
-        print('Your file is old, are you sure you want to continue?')
+        print('Your file is old, are you sure you want to continue? It was last saved on :', input_modified_date)
         response = input('Enter Y to continue. Any other input will quit.')
-        if response != 'Y':
+        if response.lower() != 'y':
             raise SystemExit
+    return True
 
 def update_output_file(input_filename, output_filename):
     # Using 'with open' because the source files can be very large and cause memory errors
