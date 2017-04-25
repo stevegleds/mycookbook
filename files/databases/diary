@@ -1,3 +1,4 @@
 25 April 2017
 Created simple sqlite database> Next step is to use sqlalchemy
 following these instructions: http://pythoncentral.io/introductory-tutorial-python-sqlalchemy/
+Added example.db to git
