@@ -1,3 +1,7 @@
+26 April 2017
+Tried to follow from mysql book but not compatible>
+trying to find way to make insert new records easier
+created separate files to run database table creation; data changing and data output queries.
 25 April 2017
 Created simple sqlite database> Next step is to use sqlalchemy
 following these instructions: http://pythoncentral.io/introductory-tutorial-python-sqlalchemy/
