@@ -6,7 +6,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PackageRequirementsSettings">
-    <option name="requirementsPath" value="H:\other-data\python-code-laptop\mycookbook" />
+    <option name="requirementsPath" value="H:\other-data\python-code-laptop\mycookbook\databases\requirements.txt" />
   </component>
   <component name="TestRunnerService">
     <option name="PROJECT_TEST_RUNNER" value="Unittests" />
