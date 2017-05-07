@@ -61,3 +61,10 @@ if fake_user in session:
     print('Fake user is:', fake_user.name)
 else:
     print('Fake user does not exist')
+
+for instance in session.query(User).order_by(User.name):
+    print(instance.name, instance.fullname)
+for name, fullname in session.query(User.name, User.fullname):
+    print(name, fullname)
+for row in session.query(User, User.name).all():
+    print(row.User, row.name)
