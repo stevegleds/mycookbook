@@ -3,6 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base # Used to create the base classes
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import aliased
 
 engine = create_engine('sqlite:///:memory:', echo=True)  # for tutorial using in memory only
 Session = sessionmaker(bind=engine) # Creates session class
@@ -61,10 +62,21 @@ if fake_user in session:
     print('Fake user is:', fake_user.name)
 else:
     print('Fake user does not exist')
-
+'''
+Queries
+Use .label() to change attribute names for convenience.
+Change User.name to runner for example
+Use aliased() to change entity name
+runner = aliased(User, name='runner')
+'''
 for instance in session.query(User).order_by(User.name):
     print(instance.name, instance.fullname)
 for name, fullname in session.query(User.name, User.fullname):
     print(name, fullname)
 for row in session.query(User, User.name).all():
-    print(row.User, row.name)
+    print('row.User, row.name', row.User, row.name)
+for row in session.query(User.name.label('runnername')):
+    print('row.runnername', row.runnername)
+runner = aliased(User, name='runner')
+for row in session.query(runner, runner.name.label('runnername')):
+    print('row.runner, row.runnername', row.runner, row.runnername)
