@@ -4,6 +4,8 @@ from sqlalchemy.ext.declarative import declarative_base  # Used to create the ba
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import aliased
+from sqlalchemy import text
+from sqlalchemy import func
 
 engine = create_engine('sqlite:///:memory:', echo=True)  # for tutorial using in memory only
 Session = sessionmaker(bind=engine)  # Creates session class
@@ -102,3 +104,7 @@ for runner in session.query(User).\
     print(runner)
 query = session.query(User).filter(User.name.like('%ed'))
 print(query.all())
+for user in session.query(User).\
+        filter(text("id<224")).\
+        order_by(text("id")).all():
+    print(user.name)
