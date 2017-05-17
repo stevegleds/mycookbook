@@ -1,3 +1,8 @@
+17 May 2017
+Moved databases folder and requirements to root. renamed app.py to app2
+Completed filter and order by text
+Completed simple count() function
+Next step : relationships!!
 12 May 2017
 Just started "Using Textual SQL"
 07 May 2017

@@ -47,7 +47,7 @@ print(ed_user is our_user)
 
 # Add more users with session.add_all()
 session.add_all([
-    User(name='Wendy', fullname='Wendy Williams', password='foobar'),
+    User(name='wendy', fullname='Wendy Williams', password='foobar'),
     User(name='mary', fullname='Mary Contrary', password='xxgjk'),
     User(name='fred', fullname='Fred Flinstone', password='blah')
 ])
@@ -104,7 +104,28 @@ for runner in session.query(User).\
     print(runner)
 query = session.query(User).filter(User.name.like('%ed'))
 print(query.all())
+
+'''
+Filter and sort results using text() function
+This makes use of the text() funciton.
+Text() expect to see a string such as used here:
+filter(text("id<224"))
+I modified this by using helper variables to store the info:
+    idnumber = 4
+    idfiltertext = "id<{0}".format(str(idnumber))
+and then:
+    filter(text(idfiltertext))
+'''
+idnumber = 4
+idfiltertext = "id<{0}".format(str(idnumber))
+sortby = 'name'
+print("id filter text is: ", idfiltertext, type(idfiltertext))
 for user in session.query(User).\
-        filter(text("id<224")).\
-        order_by(text("id")).all():
-    print(user.name)
+        filter(text(idfiltertext)).\
+        order_by(text(sortby)).all():
+    print("This runner has an id less than", idnumber, ":", user.name, user.id)
+
+'''
+Counting
+'''
+print('Number of runners with "ed" in their name:', session.query(User).filter(User.name.like('%ed')).count())
