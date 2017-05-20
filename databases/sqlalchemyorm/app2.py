@@ -6,6 +6,8 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import aliased
 from sqlalchemy import text
 from sqlalchemy import func
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import relationship
 
 engine = create_engine('sqlite:///:memory:', echo=True)  # for tutorial using in memory only
 Session = sessionmaker(bind=engine)  # Creates session class
@@ -18,7 +20,6 @@ If you are working through this tutorial and want less output generated, set it 
 '''
 Base = declarative_base()
 
-
 class User(Base):
     __tablename__ = 'users'  # required
 
@@ -26,14 +27,27 @@ class User(Base):
     name = Column(String(50))  # lengths not required but it is good practice
     fullname = Column(String(50))
     password = Column(String(24))
-    #
-    # def __init__(self, name, fullname, password):
-    #     self.name = name
-    #     self.fullname = fullname
-    #     self.password = password
 
     def __repr__(self):  # optional
         return "<User(name='%s', fullname='%s', password='%s')>" % (self.name, self.fullname, self.password)
+'''
+Relationships. 
+Address class linked to User class
+ForeignKey column is constrained to the values in remote column
+'''
+class Address(Base):
+    __tablename__ = 'addresses'
+    id = Column(Integer, primary_key=True)
+    email_address = Column(String, nullable=False)
+    user_id = Column(Integer, ForeignKey('users.id'))
+
+    user = relationship("User", back_populates="addresses")
+
+    def __repr__(self):
+        return "<Address(email_address='%s')>" % self.email_address
+
+User.addresses = relationship(
+    "Address", order_by=Address.id, back_populates="user")
 
 Base.metadata.create_all(engine)
 

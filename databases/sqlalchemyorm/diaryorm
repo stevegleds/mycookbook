@@ -1,3 +1,5 @@
+20 May 2017
+Added address class for working with relationships
 17 May 2017
 Moved databases folder and requirements to root. renamed app.py to app2
 Completed filter and order by text
