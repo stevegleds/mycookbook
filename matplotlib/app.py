@@ -20,3 +20,6 @@ top_10.rename(columns={
 
 print(top_10)
 print('Hi again')
+plt.style.use('ggplot')
+top_10.plot(kind='barh', y='Sales', x='Name')
+print('end')
