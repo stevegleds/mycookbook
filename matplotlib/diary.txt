@@ -1,3 +1,6 @@
+09 February 2020
+Added code to easily change plot values such as labels and limits
+
 06 February 2020
 Now getting to the plot part. I think the code is correct but no plot showing 
 Google seems to say we need something like jupyter. Tried to use VS code to install according to prompt.

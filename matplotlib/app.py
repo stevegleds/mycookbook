@@ -21,6 +21,12 @@ top_10.rename(columns={
 print(top_10)
 print('Hi again')
 plt.style.use('ggplot')
-top_10.plot(kind='barh', y='Sales', x='Name')
+fig, ax = plt.subplots(figsize=(
+    5, 6))  # Any future customization will be done via the ax or fig objects.
+top_10.plot(kind='barh', y='Sales', x='Name', ax=ax)
+ax.set_xlim([10000, 140000])
+ax.set_xlabel('Total Revenue')
+ax.set_ylabel('Customer')
+ax.legend().set_visible(False)
 plt.show()
 print('end')
