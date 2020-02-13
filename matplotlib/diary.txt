@@ -1,3 +1,6 @@
+13 February 2020
+Added formatter function for currency values.
+Tried to set ylabel width to show all names but no joy
 09 February 2020
 Added code to easily change plot values such as labels and limits
 
@@ -6,3 +9,4 @@ Now getting to the plot part. I think the code is correct but no plot showing
 Google seems to say we need something like jupyter. Tried to use VS code to install according to prompt.
 But still no plot.
 Now simply adding plt.show() and it works
+https://pbpython.com/effective-matplotlib.html
