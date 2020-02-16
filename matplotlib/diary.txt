@@ -1,3 +1,5 @@
+16 February 2020
+Added average line and text to some bars
 13 February 2020
 Added formatter function for currency values.
 Tried to set ylabel width to show all names but no joy

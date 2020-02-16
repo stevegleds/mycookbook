@@ -29,13 +29,22 @@ top_10.rename(columns={
 print(top_10)
 print('Hi again')
 plt.style.use('ggplot')
-fig, ax = plt.subplots(figsize=(
-    14, 6))  # Any future customization will be done via the ax or fig objects.
+# Single Plot
+fig, ax = plt.subplots(figsize=(14, 6))
+# Subplot allows any future customization will be done via the ax or fig objects.
 top_10.plot(kind='barh', y='Sales', x='Name', ax=ax)
 ax.set_xlim([40000, 140000])
 ax.set(title='2014 Revenue', xlabel='Total Revenue', ylabel='Customer')
 formatter = FuncFormatter(currency)
 ax.xaxis.set_major_formatter(formatter)
 ax.legend().set_visible(False)
+# Annotate new customers - random 3, 5, 8
+for cust in [3, 5, 8]:
+    ax.text(115000, cust, "New Customer")
+# Add average line
+avg = top_10['Sales'].mean()
+ax.axvline(x=avg, color='b', label='Average', linestyle='--', linewidth=2)
 plt.show()
+# Dual Plot
+
 print('end')
