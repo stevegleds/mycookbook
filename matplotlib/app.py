@@ -38,13 +38,16 @@ ax.set(title='2014 Revenue', xlabel='Total Revenue', ylabel='Customer')
 formatter = FuncFormatter(currency)
 ax.xaxis.set_major_formatter(formatter)
 ax.legend().set_visible(False)
-# Annotate new customers - random 3, 5, 8
-for cust in [3, 5, 8]:
-    ax.text(115000, cust, "New Customer")
+
 # Add average line
 avg = top_10['Sales'].mean()
 ax.axvline(x=avg, color='b', label='Average', linestyle='--', linewidth=2)
+# Annotate new customers - random 3, 5, 8
+for cust in [3, 5, 8]:
+    ax.text(avg, cust, "New Customer")
 plt.show()
+
 # Dual Plot
+fig, (ax0, ax1) = plt.subplots(nrows=1, ncols=2, sharey=True, figsize=(7, 4))
 
 print('end')

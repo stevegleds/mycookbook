@@ -1,3 +1,5 @@
+17 February 2020
+Started dual plot. Looks easy enough.
 16 February 2020
 Added average line and text to some bars
 13 February 2020
