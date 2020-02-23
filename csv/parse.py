@@ -1,6 +1,7 @@
 import numpy as np
 import csv
 
+
 DATA_FILE = 'data.csv'  # this is used to map lat / long to sectors
 OUTPUT_FILE = 'output.csv'  # this is the source file
 
@@ -18,11 +19,14 @@ def parse(raw_file, delimiter=','):
     #  open csv file
     opened_file = open(raw_file)
     #  read csv file
-    csv_data = csv.reader(opened_file, delimiter=delimiter)  # first delimiter is csv.reader variable name
+    csv_data = csv.reader(
+        opened_file,
+        delimiter=delimiter)  # first delimiter is csv.reader variable name
     #  csv_data object is now an iterator meaning we can get each element one at a time
     #  build data structure to return parsed data
     parsed_data = []  # this list will store every row of data
-    fields = csv_data.__next__()  # this will be the column headers; we can use .next() because csv_data is an iterator
+    fields = csv_data.__next__(
+    )  # this will be the column headers; we can use .next() because csv_data is an iterator
     for row in csv_data:
         if row[1] == "":  # there is no text in the field so no data to process
             pass
@@ -42,17 +46,24 @@ def save_results(raw_file, results):
     :return: nothing. File is saved and closed within the function
     """
     with open(raw_file, "w", newline='') as f:
-        writer = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        writer.writerow(['Country Code', 'Date', 'Time', 'IpAddress', 'Latitude', 'Longitude',
-                         'Download Speed', 'Upload Speed', 'Sector', 'Constituency'])
+        writer = csv.writer(f,
+                            delimiter=',',
+                            quotechar='"',
+                            quoting=csv.QUOTE_MINIMAL)
+        writer.writerow([
+            'Country Code', 'Date', 'Time', 'IpAddress', 'Latitude',
+            'Longitude', 'Download Speed', 'Upload Speed', 'Sector',
+            'Constituency'
+        ])
         for item in results:
-            writer.writerow([item['CountryCode'], item['Date'], item['DateTimeStamp'], item['IpAddress'],
-                             item['Latitude'], item['Longitude'],
-                             item['DownloadSpeed'] / 1024, item['UploadSpeed'] / 1024,
-                             item['Sector'], item['Constituency']])
+            writer.writerow([
+                item['CountryCode'], item['Date'], item['DateTimeStamp'],
+                item['IpAddress'], item['Latitude'], item['Longitude'],
+                item['DownloadSpeed'] / 1024, item['UploadSpeed'] / 1024,
+                item['Sector'], item['Constituency']
+            ])
     f.close()
     return
-
 
 
 def main():
@@ -66,8 +77,9 @@ def main():
     constituency_coordinates = get_coordinates(constituency_data)
     constituency_coordinates_array = np.asarray(constituency_coordinates)
     print('Sector array prepared after ', time.time() - start, 'seconds')
-    sectors, constituencies, results = get_closest_points(speedtest_results_data, sector_coordinates_array,
-                                          sector_data, constituency_coordinates_array, constituency_data)
+    sectors, constituencies, results = get_closest_points(
+        speedtest_results_data, sector_coordinates_array, sector_data,
+        constituency_coordinates_array, constituency_data)
     save_results(UPDATED_RESULTS_FILE, results)
 
 
