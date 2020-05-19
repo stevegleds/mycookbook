@@ -15,5 +15,7 @@
 
 ### Venv ###
 venvcookbook/*
+venv/*
+*.csv
 
 # End of https://www.gitignore.io/api/visualstudiocode
