@@ -7,7 +7,7 @@ For the email import the first line needs to be 'email' so this is added before 
 """
 from itertools import chain
 import os
-
+import csv
 
 def split_file(filename, pattern, size):
     """Split a file into multiple output files.
@@ -33,9 +33,9 @@ def split_file(filename, pattern, size):
 
 
 if __name__ == '__main__':
-    source_filename = 'speed-input.csv'  # this is full list of subscribers from OpenEMM
+    source_filename = 'april2020.csv'  # this is full list of subscribers from OpenEMM
     destination_filename = 'speed-output.csv'
     source_file = os.path.join('', source_filename)
     print('Source file is:', source_file)
     pattern = destination_filename + 'part_{0:03d}.csv'
-    split_file(source_file, pattern, 20)
+    split_file(source_file, pattern, 1000000)

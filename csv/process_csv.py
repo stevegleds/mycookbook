@@ -7,9 +7,8 @@ remove() is function to go through parsed file and produce output with bad value
 import csv
 
 
-DATA_FILE = 'data.csv'  # this is used to map lat / long to sectors
-OUTPUT_FILE = 'output.csv'  # this is the source file
-
+DATA_FILE = 'april2020_002.csv'  # this is source speed test data
+OUTPUT_FILE = 'output2' + DATA_FILE   # this is the final file
 print('Data file used is: ', DATA_FILE)
 print('Output file used is:', OUTPUT_FILE)
 
@@ -44,7 +43,7 @@ def parse(raw_file, delimiter=','):
     return parsed_data
 
 
-def remove_extremes(data_file, output_file, month):
+def remove_extremes(data_file, output_file):
 
     with open(output_file, "w", newline='') as f:
         writer = csv.writer(f,
@@ -52,26 +51,24 @@ def remove_extremes(data_file, output_file, month):
                             quotechar='"',
                             quoting=csv.QUOTE_MINIMAL)
         writer.writerow([
-            'Date', 'Count', 'DL', 'UL', 'Ping',
+            'Date', 'DL', 'UL', 'Ping',
             'TCPPing' 
         ])
 
         for item in data_file:
-            if int(item['TCPPingTime']) < 70 and item['Date'][3:5] == month:
+            if item['TCPPingTime'] != 'NULL' and int(item['TCPPingTime']) <= 4000 : 
                 writer.writerow([
-                    item['Date'], item['TestsNumber'], item['DL'],
-                    item['UL'], item['PingTime'], item['TCPPingTime']
+                    item['DateTimeStamp'], int(item['DownloadSpeed']) / 1000,
+                    int(item['UploadSpeed']) / 1000, item['PingTime'], item['TCPPingTime']
                 ])
     f.close()    
     return
 
 def main():
-    month = '04' # to split files into months to make them more manageable.
-    raw_data_file = 'filename.csv'
-    output_data_file = 'outputfilename_' + month + '.csv'
-    raw_data_file = parse(raw_data_file)
+
+    raw_data_file = parse(DATA_FILE)
     
-    remove_extremes(raw_data_file, output_data_file, month)
+    remove_extremes(raw_data_file, OUTPUT_FILE)
 
     
 
